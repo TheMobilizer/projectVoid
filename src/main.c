@@ -14,7 +14,7 @@ int main(void)
     
     
     struct EnemyArray *enemyGroup = createEnemyArray();
-    EnemyArray_populate(enemyGroup, "dat/em1.enmap", 50, 50, 20);
+    EnemyArray_populate(enemyGroup, "dat/em1.enmap", 10, 10, 20);
     
     InitWindow(SCR_WIDTH, SCR_HEIGHT, "raylib [core] example - basic window");
     //ToggleFullscreen();

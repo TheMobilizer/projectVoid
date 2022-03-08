@@ -121,8 +121,8 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
 {
     struct Enemy *enemy = (struct Enemy *)malloc(sizeof(struct Enemy));
     
-    Enemy_setPosition(enemy, x, y);
     Enemy_setSize(enemy, height, width);
+    Enemy_setPosCentre(enemy, x, y);
     
     enemy->color = color;
     enemy->type = type;
@@ -141,10 +141,12 @@ void Enemy_update(struct Enemy *enemy)
 {
     //int right = TRUE;
     
-    if((enemy->position.x + 20) > SCR_WIDTH)
+    /*if((enemy->position.x + 20) > SCR_WIDTH)
         Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+1);
     else
         Enemy_setPosition(enemy, enemy->position.x+1, enemy->position.y);
+    */
+    //printf("In Enemy_update()\n");
 }
 
 void Enemy_free(struct Enemy *enemy)
