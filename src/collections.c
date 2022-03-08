@@ -30,7 +30,7 @@ struct EnemyArray *addEnemy(struct EnemyArray* enemyArray, struct Enemy* enemy)
     return enemyArray;
 }
 
-void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath)
+void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, int y, int padding)
 {
     FILE *waveFile;
     char c;
@@ -43,16 +43,25 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath)
         printf("Unable to open file\n");
     else
     {
-        int xp = 0;
+        int xp = x;
+        int yp = y;
         printf("File opened successfully\n");
         while((c = fgetc(waveFile)) != EOF)
         {
             if (c == 'E')
             {
                 
-                enemyArray = addEnemy(enemyArray, createEnemy((float) xp, (float) 10, 20, 20, BLUE,"Swarm Member"));
-                xp+=25;
+                enemyArray = addEnemy(enemyArray, createEnemy((float) (xp /*+ (xp == x?0:20)*/), (float) yp, 20, 20, BLUE,"Blue-Swarm Member"));
+                xp+=20;
+               
             }
+            else if(c == '\n')
+            {
+                yp+= padding;
+                xp = x;
+            }
+            else
+                xp+=padding;
         }
     }
     

@@ -112,6 +112,11 @@ void Enemy_setSize(struct Enemy *enemy, float height, float width)
     enemy->colRec.width = width;
 }
 
+void Enemy_setPosCentre(struct Enemy *enemy, float x, float y)
+{
+    Enemy_setPosition(enemy, x-((enemy->colRec.width)/2),y-((enemy->colRec.height)/2));
+}
+
 struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type)
 {
     struct Enemy *enemy = (struct Enemy *)malloc(sizeof(struct Enemy));
@@ -137,9 +142,9 @@ void Enemy_update(struct Enemy *enemy)
     //int right = TRUE;
     
     if((enemy->position.x + 20) > SCR_WIDTH)
-        Enemy_setPosition(enemy, enemy->position.x - 1, enemy->position.y);
-    else if(enemy->position.x < 0)
-        Enemy_setPosition(enemy, enemy->position.x + 1, enemy->position.y);
+        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+1);
+    else
+        Enemy_setPosition(enemy, enemy->position.x+1, enemy->position.y);
 }
 
 void Enemy_free(struct Enemy *enemy)

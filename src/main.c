@@ -10,14 +10,11 @@
 int main(void)
 {
     
-    struct Player *mainPlayer = createPlayer((float) SCR_WIDTH/3,(float) SCR_HEIGHT/3,20,20, MAGENTA);
-    struct Enemy *anEnemy = createEnemy((float) SCR_WIDTH, (float) SCR_HEIGHT/2,20,20, RAYWHITE, "Minion Ship");
-    struct Enemy *anotherEnemy = createEnemy((float) 0, (float) SCR_HEIGHT/4,20,20, YELLOW, "Another minion Ship");
+    struct Player *mainPlayer = createPlayer((float) SCR_WIDTH/2,(float) 550,20,20, MAGENTA);
+    
     
     struct EnemyArray *enemyGroup = createEnemyArray();
-    enemyGroup = addEnemy(enemyGroup, anEnemy);
-    enemyGroup = addEnemy(enemyGroup, anotherEnemy);
-    EnemyArray_populate(enemyGroup, "dat/em1.enmap");
+    EnemyArray_populate(enemyGroup, "dat/em1.enmap", 50, 50, 20);
     
     InitWindow(SCR_WIDTH, SCR_HEIGHT, "raylib [core] example - basic window");
     //ToggleFullscreen();
