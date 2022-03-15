@@ -141,12 +141,11 @@ void Enemy_update(struct Enemy *enemy)
 {
     //int right = TRUE;
     
-    /*if((enemy->position.x + 20) > SCR_WIDTH)
-        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+1);
+    /*if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
+        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+5);
     else
-        Enemy_setPosition(enemy, enemy->position.x+1, enemy->position.y);
-    */
-    //printf("In Enemy_update()\n");
+        Enemy_setPosition(enemy, enemy->position.x+5, enemy->position.y);*/
+    printf("In Enemy_update()\n");
 }
 
 void Enemy_free(struct Enemy *enemy)
