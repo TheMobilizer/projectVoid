@@ -176,19 +176,42 @@ void Enemy_update(struct Enemy *enemy)
     
     if(enemy->right)
     {
+
+        if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
+        {
+            enemy->right = FALSE;
+            enemy->left = TRUE;
+        }
+        
         Enemy_setPosition(enemy, enemy->position.x+2, enemy->position.y);
     }
     else if(enemy->left)
     {
+        if((enemy->position.x) < 0)
+        {
+            enemy->right = TRUE;
+            enemy->left = FALSE;
+        }
+        
         Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
     }
     
     if(enemy->down)
     {
+        if((enemy->position.y) > SCR_HEIGHT)
+        {
+            Enemy_setPosition(enemy, enemy->position.x, -2*ES_HEIGHT);
+        }
+        
         Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+2);
     }
     else if(enemy->up)
     {
+        if((enemy->position.y + 20) < 0)
+        {
+            Enemy_setPosition(enemy, enemy->position.x, SCR_HEIGHT + ES_HEIGHT);
+        }
+            
         Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
     }
 }
