@@ -51,7 +51,7 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, i
             if (c == 'E')
             {
                 
-                enemyArray = addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member"));
+                enemyArray = addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member","RIGHT"));
                 xp += ES_WIDTH + padding;
                
             }

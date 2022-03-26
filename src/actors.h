@@ -31,13 +31,17 @@ struct Enemy
     Rectangle colRec;
     Color color;
     char* type;
+    int up;
+    int down;
+    int right;
+    int left;
 };
 
 void Enemy_setPosition(struct Enemy *enemy, float x, float y);
 void Enemy_setSize(struct Enemy *enemy, float height, float width);
 void Enemy_setPosCentre(struct Enemy *enemy, float x, float y);
 
-struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type);
+struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, char* dir);
 
 void Enemy_draw(struct Enemy *enemy);
 void Enemy_update(struct Enemy *enemy);

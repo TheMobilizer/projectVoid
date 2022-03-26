@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 //--------------------------Player functions-------------------------------
 
 struct Player* createPlayer(float x, float y, float height, float width, Color color)
@@ -117,7 +117,7 @@ void Enemy_setPosCentre(struct Enemy *enemy, float x, float y)
     Enemy_setPosition(enemy, x-((enemy->colRec.width)/2),y-((enemy->colRec.height)/2));
 }
 
-struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type)
+struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, char* dir)
 {
     struct Enemy *enemy = (struct Enemy *)malloc(sizeof(struct Enemy));
     
@@ -126,11 +126,42 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     
     enemy->color = color;
     enemy->type = type;
+    
+    if(strcmp(dir, "UP") == 0)
+    {
+        enemy->up = TRUE;
+        enemy->down = FALSE;
+        enemy->right = FALSE;
+        enemy->left = FALSE;
+        printf("Enemy direction is UP\n");
+    }
+    else if(strcmp(dir, "DOWN") == 0)
+    {
+        enemy->up = FALSE;
+        enemy->down = TRUE;
+        enemy->right = FALSE;
+        enemy->left = FALSE;
+        printf("Enemy direction is DOWN\n");
+    }
+    else if(strcmp(dir, "RIGHT") == 0)
+    {
+        enemy->up = FALSE;
+        enemy->down = FALSE;
+        enemy->right = TRUE;
+        enemy->left = FALSE;
+        printf("Enemy direction is RIGHT and dir = %s\n", dir);
+    }
+    else if(strcmp(dir, "LEFT") == 0)
+    {
+        enemy->up = FALSE;
+        enemy->down = FALSE;
+        enemy->right = FALSE;
+        enemy->left = TRUE;
+        printf("Enemy direction is LEFT and dir = %s\n", dir);
+    }
     return enemy;
     
 }
-
-
 
 void Enemy_draw(struct Enemy *enemy)
 {
@@ -141,11 +172,30 @@ void Enemy_update(struct Enemy *enemy)
 {
     //int right = TRUE;
     
-    /*if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
-        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+5);
-    else
-        Enemy_setPosition(enemy, enemy->position.x+5, enemy->position.y);*/
-    printf("In Enemy_update()\n");
+    if(enemy->right)
+    {
+        if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
+        {
+            enemy->right = FALSE;
+            enemy->left = TRUE;
+            enemy->position.y += 20;
+        }
+        else
+            Enemy_setPosition(enemy, enemy->position.x+2, enemy->position.y);
+    }
+    else if(enemy->left)
+    {
+        if((enemy->position.x) < 0)
+        {
+            enemy->right = TRUE;
+            enemy->left = FALSE;
+            enemy->position.y += 20;
+        }
+        else
+            Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
+    }
+    
+    //printf("In Enemy_update()\n");
 }
 
 void Enemy_free(struct Enemy *enemy)
