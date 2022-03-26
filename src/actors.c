@@ -151,10 +151,9 @@ void Enemy_update(struct Enemy *enemy)
         {
             enemy->right = FALSE;
             enemy->left = TRUE;
-            enemy->position.y += 20;
         }
-        else
-            Enemy_setPosition(enemy, enemy->position.x+2, enemy->position.y);
+        
+        Enemy_setPosition(enemy, enemy->position.x+2, enemy->position.y);
     }
     else if(enemy->left)
     {
@@ -162,29 +161,28 @@ void Enemy_update(struct Enemy *enemy)
         {
             enemy->right = TRUE;
             enemy->left = FALSE;
-            enemy->position.y += 20;
         }
-        else
-            Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
+        
+        Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
     }
     
     if(enemy->down)
     {
         if((enemy->position.y) > SCR_HEIGHT)
         {
-            enemy->position.y = -2*ES_HEIGHT;
+            Enemy_setPosition(enemy, enemy->position.x, -2*ES_HEIGHT);
         }
-        else
-            Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+2);
+        
+        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+2);
     }
     else if(enemy->up)
     {
         if((enemy->position.y + 20) < 0)
         {
-            enemy->position.y = SCR_HEIGHT + ES_HEIGHT ;
+            Enemy_setPosition(enemy, enemy->position.x, SCR_HEIGHT + ES_HEIGHT);
         }
-        else
-            Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
+            
+        Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
     }
     //printf("In Enemy_update()\n");
 }
