@@ -117,7 +117,7 @@ void Enemy_setPosCentre(struct Enemy *enemy, float x, float y)
     Enemy_setPosition(enemy, x-((enemy->colRec.width)/2),y-((enemy->colRec.height)/2));
 }
 
-struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, char* dir)
+struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, int right, int left, int up, int down)
 {
     struct Enemy *enemy = (struct Enemy *)malloc(sizeof(struct Enemy));
     
@@ -127,38 +127,11 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     enemy->color = color;
     enemy->type = type;
     
-    if(strcmp(dir, "UP") == 0)
-    {
-        enemy->up = TRUE;
-        enemy->down = FALSE;
-        enemy->right = FALSE;
-        enemy->left = FALSE;
-        printf("Enemy direction is UP\n");
-    }
-    else if(strcmp(dir, "DOWN") == 0)
-    {
-        enemy->up = FALSE;
-        enemy->down = TRUE;
-        enemy->right = FALSE;
-        enemy->left = FALSE;
-        printf("Enemy direction is DOWN\n");
-    }
-    else if(strcmp(dir, "RIGHT") == 0)
-    {
-        enemy->up = FALSE;
-        enemy->down = FALSE;
-        enemy->right = TRUE;
-        enemy->left = FALSE;
-        printf("Enemy direction is RIGHT and dir = %s\n", dir);
-    }
-    else if(strcmp(dir, "LEFT") == 0)
-    {
-        enemy->up = FALSE;
-        enemy->down = FALSE;
-        enemy->right = FALSE;
-        enemy->left = TRUE;
-        printf("Enemy direction is LEFT and dir = %s\n", dir);
-    }
+    enemy->up = up;
+    enemy->down = down;
+    enemy->right = right;
+    enemy->left = left;
+    
     return enemy;
     
 }
@@ -195,6 +168,24 @@ void Enemy_update(struct Enemy *enemy)
             Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
     }
     
+    if(enemy->down)
+    {
+        if((enemy->position.y) > SCR_HEIGHT)
+        {
+            enemy->position.y = -2*ES_HEIGHT;
+        }
+        else
+            Enemy_setPosition(enemy, enemy->position.x, enemy->position.y+2);
+    }
+    else if(enemy->up)
+    {
+        if((enemy->position.y + 20) < 0)
+        {
+            enemy->position.y = SCR_HEIGHT + ES_HEIGHT ;
+        }
+        else
+            Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
+    }
     //printf("In Enemy_update()\n");
 }
 
