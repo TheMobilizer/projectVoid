@@ -1,4 +1,3 @@
-
 //-------------------------Player struct and functions-------------------------
 
 struct Player
@@ -7,6 +6,10 @@ struct Player
     Vector2 velocity;
     Rectangle colRec;
     Color color;
+    
+    int lives;
+    int isAlive;
+    
     int up;
     int down;
     int right;
@@ -47,7 +50,7 @@ void Enemy_draw(struct Enemy *enemy);
 void Enemy_update(struct Enemy *enemy);
 void Enemy_free(struct Enemy *enemy);
 
-void Enemy_drawAll(struct Enemy **enemies);
+//void Enemy_drawAll(struct Enemy **enemies);
 
 //-----------------------------------------------------------------------------
 

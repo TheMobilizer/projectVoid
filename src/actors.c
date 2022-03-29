@@ -35,6 +35,9 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
     player->velocity.x = 5;
     player->velocity.y = 5;
     
+    player->lives = 1;
+    player->isAlive = TRUE;
+    
     return player;
 }
 
@@ -53,39 +56,53 @@ void Player_draw(struct Player *player)
 
 void Player_update(struct Player *player)
 {
+    if(player->isAlive)
+    {
+        if (player->lives == 0)
+        {
+            player->isAlive = FALSE;
+            printf("Player is dead. Game over.");
+            return;
+        }
+        
+        player->up = IsKeyDown(KEY_UP);
+        player->down = IsKeyDown(KEY_DOWN);
+        player->right = IsKeyDown(KEY_RIGHT);
+        player->left = IsKeyDown(KEY_LEFT);
+        
+        
 
-    player->up = IsKeyDown(KEY_UP);
-    player->down = IsKeyDown(KEY_DOWN);
-    player->right = IsKeyDown(KEY_RIGHT);
-    player->left = IsKeyDown(KEY_LEFT);
-
-    if(player->up)
-    {
-        player->velocity.y = -Y_VEL;
-        printf("player up\n");
-    }
+        if(player->up)
+        {
+            player->velocity.y = -Y_VEL;
+            printf("player up\n");
+        }
     
-    else if(player->down)
-    {
-        player->velocity.y = Y_VEL;
-        printf("player down\n");
-    }
+        else if(player->down)
+        {
+            player->velocity.y = Y_VEL;
+            printf("player down\n");
+        }
     
-    if (player->right)
-    {
-        player->velocity.x = X_VEL;
-        printf("player right\n");
-    }
-    else if(player->left)
-    {
-        player->velocity.x = -X_VEL;
-        printf("player left\n");
-    }
+        if (player->right)
+        {
+            player->velocity.x = X_VEL;
+            printf("player right\n");
+        }
+        else if(player->left)
+        {
+            player->velocity.x = -X_VEL;
+            printf("player left\n");
+        }
     
-    Player_setPosition(player ,player->position.x + player->velocity.x, player->position.y + player->velocity.y);
+        Player_setPosition(player ,player->position.x + player->velocity.x, player->position.y + player->velocity.y);
    
-    player->velocity.x = 0;
-    player->velocity.y = 0;
+        player->velocity.x = 0;
+        player->velocity.y = 0;
+    }
+    
+    else
+        Player_free(player);
     
 }
 
