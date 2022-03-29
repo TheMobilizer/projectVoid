@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
 //--------------------------Player functions-------------------------------
 
 struct Player* createPlayer(float x, float y, float height, float width, Color color)
@@ -35,7 +37,7 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
     player->velocity.x = 5;
     player->velocity.y = 5;
     
-    player->lives = 1;
+    player->lives = 10;
     player->isAlive = TRUE;
     
     return player;
@@ -54,16 +56,20 @@ void Player_draw(struct Player *player)
     DrawRectangleRec(player->colRec, player->color);    
 }
 
-void Player_update(struct Player *player)
+void Player_update(struct Player *player, struct EnemyArray *enemyArray)
 {
     if(player->isAlive)
     {
         if (player->lives == 0)
         {
             player->isAlive = FALSE;
+            //Player_free(player);
             printf("Player is dead. Game over.");
+            
             return;
         }
+        
+        Player_collide(player, enemyArray);
         
         player->up = IsKeyDown(KEY_UP);
         player->down = IsKeyDown(KEY_DOWN);
@@ -100,15 +106,37 @@ void Player_update(struct Player *player)
         player->velocity.x = 0;
         player->velocity.y = 0;
     }
-    
     else
-        Player_free(player);
-    
+    {
+        DrawText("---Game Over---", SCR_WIDTH/2 - 50, SCR_HEIGHT/2 - 50, 25, YELLOW);
+        player->color = RAYWHITE;
+    }
+}
+
+void Player_die(struct Player *player)
+{
+    player->lives--;
+    player->color = RAYWHITE;
 }
 
 void Player_free(struct Player *player)
 {
     free(player);
+}
+
+void Player_collide(struct Player *player, struct EnemyArray * enemyArray)
+{
+    int i;
+    for(i = 0; i < enemyArray->length; i++)
+    {
+        if(CheckCollisionRecs(player->colRec, enemyArray->enemies[i].colRec))
+        {
+            Player_die(player);
+            break;
+        }
+        else
+            player->color = MAGENTA;
+    }
 }
 
 //--------------------------------------------------------------------------

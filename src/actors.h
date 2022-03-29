@@ -1,5 +1,8 @@
 //-------------------------Player struct and functions-------------------------
-
+#ifndef INCLUDED
+#include "collections.h"
+#define INCLUDED
+#endif
 struct Player
 {
     Vector2 position;
@@ -20,8 +23,9 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
 
 void Player_setPosition(struct Player *player, float x, float y);
 void Player_draw(struct Player *player);
-void Player_update(struct Player *player);
+void Player_update(struct Player *player, struct EnemyArray *enemyArray);
 void Player_free(struct Player *player);
+void Player_collide(struct Player *player, struct EnemyArray *enemyArray);
 
 //-----------------------------------------------------------------------------
 

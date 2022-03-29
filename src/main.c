@@ -2,10 +2,10 @@
 #include "raylib.h"
 #include "actors.h"
 #include "defaults.h"
+//#include "collections.h"
 #define INCLUDED
 #endif
 #include <stdio.h>
-#include "collections.h"
 
 int main(void)
 {
@@ -37,9 +37,12 @@ int main(void)
         BeginDrawing();
 
             ClearBackground(BLACK);
+            DrawFPS(10,10);
+            DrawText("Player Color", 10, 30, 14, mainPlayer->color);
+            
 
             //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-            Player_update(mainPlayer);
+            Player_update(mainPlayer, enemyGroup);
             Player_draw(mainPlayer);
             
             EnemyArray_update(enemyGroup);
