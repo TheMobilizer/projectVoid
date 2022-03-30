@@ -86,7 +86,6 @@ void EnemyArray_destroyEnemy(struct EnemyArray* enemyArray, int index)
     struct Enemy tempEnemy = enemyArray->enemies[enemyArray->length - 1];
     enemyArray->enemies[enemyArray->length - 1] = enemyArray->enemies[index];
     enemyArray->enemies[index] = tempEnemy;
-    //Enemy_destroy(&enemyArray->enemies[enemyArray->length - 1]);  //Crashes the game for some reason. 'double free' or something.
     enemyArray->length--;
 }
 
