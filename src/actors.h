@@ -42,6 +42,8 @@ struct Enemy
     int down;
     int right;
     int left;
+    
+    bool isAlive;
 };
 
 void Enemy_setPosition(struct Enemy *enemy, float x, float y);
@@ -52,6 +54,7 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
 
 void Enemy_draw(struct Enemy *enemy);
 void Enemy_update(struct Enemy *enemy);
+void Enemy_destroy(struct Enemy *enemy);
 void Enemy_free(struct Enemy *enemy);
 
 //void Enemy_drawAll(struct Enemy **enemies);

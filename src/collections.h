@@ -10,6 +10,7 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, i
 void EnemyArray_draw(struct EnemyArray* enemyArray);
 void EnemyArray_update(struct EnemyArray* enemyArray);
 void EnemyArray_free(struct EnemyArray* enemyArray);
+void EnemyArray_destroyEnemy(struct EnemyArray* enemyArray, int index);
 
 void drawAll();
 void updateAll();

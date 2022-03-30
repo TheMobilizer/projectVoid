@@ -58,6 +58,6 @@ int main(void)
     //--------------------------------------------------------------------------------------
     Player_free(mainPlayer);
     EnemyArray_free(enemyGroup);
-    CloseWindow();    
+    CloseWindow();
     return 0;
 }

@@ -81,24 +81,20 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         if(player->up)
         {
             player->velocity.y = -Y_VEL;
-            printf("player up\n");
         }
     
         else if(player->down)
         {
             player->velocity.y = Y_VEL;
-            printf("player down\n");
         }
     
         if (player->right)
         {
             player->velocity.x = X_VEL;
-            printf("player right\n");
         }
         else if(player->left)
         {
             player->velocity.x = -X_VEL;
-            printf("player left\n");
         }
     
         Player_setPosition(player ,player->position.x + player->velocity.x, player->position.y + player->velocity.y);
@@ -132,6 +128,8 @@ void Player_collide(struct Player *player, struct EnemyArray * enemyArray)
         if(CheckCollisionRecs(player->colRec, enemyArray->enemies[i].colRec))
         {
             Player_die(player);
+            EnemyArray_destroyEnemy(enemyArray, i);
+            printf("In Player_collide(). enemyArray->length = %d\n",enemyArray->length);
             break;
         }
         else
@@ -176,6 +174,8 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     enemy->down = down;
     enemy->right = right;
     enemy->left = left;
+    
+    enemy->isAlive = true;
     
     return enemy;
     
@@ -259,6 +259,12 @@ void Enemy_update(struct Enemy *enemy)
             
         Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
     }
+}
+
+void Enemy_destroy(struct Enemy *enemy)
+{
+    enemy->isAlive = false;
+    Enemy_free(enemy);
 }
 
 void Enemy_free(struct Enemy *enemy)
