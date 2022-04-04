@@ -9,10 +9,10 @@ struct Player
     Vector2 velocity;
     Rectangle colRec;
     Color color;
-    
+    struct Bullet *currentBullet;
     int lives;
     int isAlive;
-    
+    int fire;
     int up;
     int down;
     int right;
@@ -37,12 +37,11 @@ struct Enemy
     Vector2 velocity;
     Rectangle colRec;
     Color color;
-    char* type;
     int up;
     int down;
     int right;
     int left;
-    
+    char* type;
     bool isAlive;
 };
 
@@ -57,9 +56,28 @@ void Enemy_update(struct Enemy *enemy);
 void Enemy_destroy(struct Enemy *enemy);
 void Enemy_free(struct Enemy *enemy);
 
-//void Enemy_drawAll(struct Enemy **enemies);
+//------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
+//----------------------------------Player Bullet struct and functions----------------------------
 
-//---------------------------Group functions------------------------------
+struct Bullet
+{
+    Vector2 position;
+    Vector2 velocity;
+    Rectangle colRec;
+    Color color;
+    char* type;
+    int up;
+    int down;
+    int right;
+    int left;
+    bool isAlive;
+};
 
+struct Bullet* createBullet(float x, float y, float height, float width, Color color, char* type, int right, int left, int up, int down);
+
+void Bullet_draw(struct Bullet *bullet);
+void Bullet_update(struct Bullet *bullet);
+void Bullet_setPosition(struct Bullet *bullet, float x, float y);
+void Bullet_destroy(struct Bullet *bullet);
+void Bullet_free(struct Bullet *bullet);

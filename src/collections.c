@@ -96,3 +96,23 @@ void EnemyArray_free(struct EnemyArray* enemyArray)
     free(enemyArray);
 }
 
+//------------------------------------------------------------------------------
+
+//------------------------Bullet Array functions--------------------------------
+
+struct BulletArray *createBulletArray()
+{
+    struct BulletArray *bulletArray = (struct BulletArray*)malloc(sizeof(struct BulletArray));
+    bulletArray->bullets =(struct Bullet*)malloc(sizeof(struct Bullet));
+    bulletArray->length = 0;
+    return bulletArray;
+}
+
+struct BulletArray *addBullet(struct BulletArray* bulletArray, struct Bullet* bullet)
+{
+    bulletArray->bullets[bulletArray->length] = *bullet;
+    (bulletArray->length)++;
+    //printf("In addEnemy()\n");
+    bulletArray->bullets = (struct Bullet*)realloc(bulletArray->bullets,(bulletArray->length + 1)*sizeof(struct Bullet));
+    return bulletArray;
+}

@@ -18,3 +18,6 @@
 #define ES_DOWN_RIGHT 1,0,0,1
 #define ES_DOWN_LEFT 0,1,0,1
 #define ES_NONE 0,0,0,0
+
+#define MAX_PLAYER_BULLETS 10
+#define SIMPLE_BULLETS_VELY 10

@@ -39,7 +39,8 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
     
     player->lives = 10;
     player->isAlive = TRUE;
-    
+    player->fire = FALSE;
+    player->currentBullet = NULL;
     return player;
 }
 
@@ -53,7 +54,9 @@ void Player_setPosition(struct Player *player, float x, float y)
 
 void Player_draw(struct Player *player)
 {
-    DrawRectangleRec(player->colRec, player->color);    
+    DrawRectangleRec(player->colRec, player->color);
+    if(player->currentBullet != NULL)
+        Bullet_draw(player->currentBullet);
 }
 
 void Player_update(struct Player *player, struct EnemyArray *enemyArray)
@@ -75,6 +78,7 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         player->down = IsKeyDown(KEY_DOWN);
         player->right = IsKeyDown(KEY_RIGHT);
         player->left = IsKeyDown(KEY_LEFT);
+        player->fire = IsKeyDown(KEY_Z);
         
         
 
@@ -98,6 +102,16 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         }
     
         Player_setPosition(player ,player->position.x + player->velocity.x, player->position.y + player->velocity.y);
+        
+        if(player->fire)
+        {
+            player->currentBullet = createBullet(player->position.x + 10, player->position.y, 10, 5, RAYWHITE, "Simple Bullet", ES_UP);
+        }
+        
+        if(player->currentBullet != NULL)
+        {
+            Bullet_update(player->currentBullet);
+        }
    
         player->velocity.x = 0;
         player->velocity.y = 0;
@@ -270,4 +284,48 @@ void Enemy_destroy(struct Enemy *enemy)
 void Enemy_free(struct Enemy *enemy)
 {
     free(enemy);
+}
+
+//------------------------------------------------------------------
+
+//--------------Player Bullet struct and functions------------------
+
+struct Bullet* createBullet(float x, float y, float height, float width, Color color, char* type, int right, int left, int up, int down)
+{
+    struct Bullet *bullet = (struct Bullet *)malloc(sizeof(struct Bullet));
+    bullet->position.x = x;
+    bullet->position.y = y;
+    bullet->colRec.x = x;
+    bullet->colRec.y = y;
+    bullet->color = color;
+    bullet->colRec.width = width;
+    bullet->colRec.height = height;
+    bullet->type = type;
+    bullet->right = right;
+    bullet->left = left;
+    bullet->up = up;
+    bullet->down = down;
+    return bullet;
+}
+void Bullet_setPosition(struct Bullet *bullet, float x, float y)
+{
+    bullet->position.x = x;
+    bullet->position.y = y;
+    bullet->colRec.x = x;
+    bullet->colRec.y = y;
+}
+
+void Bullet_update(struct Bullet *bullet)
+{
+    if(bullet->position.y < -10)
+    {
+        bullet = NULL;
+        return;
+    }
+    Bullet_setPosition(bullet, bullet->position.x, bullet->position.y-SIMPLE_BULLETS_VELY);
+    
+}
+void Bullet_draw(struct Bullet *bullet)
+{
+    DrawRectangleRec(bullet->colRec, bullet->color);
 }
