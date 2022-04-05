@@ -9,7 +9,7 @@ struct Player
     Vector2 velocity;
     Rectangle colRec;
     Color color;
-    struct Bullet *currentBullet;
+    struct BulletArray *currentBulletSet;
     int lives;
     int isAlive;
     int fire;

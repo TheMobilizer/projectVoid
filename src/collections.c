@@ -116,3 +116,17 @@ struct BulletArray *addBullet(struct BulletArray* bulletArray, struct Bullet* bu
     bulletArray->bullets = (struct Bullet*)realloc(bulletArray->bullets,(bulletArray->length + 1)*sizeof(struct Bullet));
     return bulletArray;
 }
+
+void BulletArray_draw(struct BulletArray* bulletArray)
+{
+    int i;
+    for (i = 0; i < bulletArray->length; i++)
+        Bullet_draw((bulletArray->bullets + i));
+}
+
+void BulletArray_update(struct BulletArray* bulletArray)
+{
+    int i;
+    for (i = 0; i < bulletArray->length; i++)
+        Bullet_update((bulletArray->bullets + i));
+}

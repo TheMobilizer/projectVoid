@@ -40,7 +40,7 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
     player->lives = 10;
     player->isAlive = TRUE;
     player->fire = FALSE;
-    player->currentBullet = NULL;
+    player->currentBulletSet = createBulletArray();
     return player;
 }
 
@@ -55,8 +55,8 @@ void Player_setPosition(struct Player *player, float x, float y)
 void Player_draw(struct Player *player)
 {
     DrawRectangleRec(player->colRec, player->color);
-    if(player->currentBullet != NULL)
-        Bullet_draw(player->currentBullet);
+    //if(player->currentBullet != NULL)
+        BulletArray_draw(player->currentBulletSet);
 }
 
 void Player_update(struct Player *player, struct EnemyArray *enemyArray)
@@ -105,13 +105,14 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         
         if(player->fire)
         {
-            player->currentBullet = createBullet(player->position.x + 10, player->position.y, 10, 5, RAYWHITE, "Simple Bullet", ES_UP);
+            if(player->position.y - player->currentBulletSet->bullets[player->currentBulletSet->length - 1].position.y >= 100)
+                player->currentBulletSet = addBullet(player->currentBulletSet,createBullet(player->position.x + 10, player->position.y, 10, 5, RAYWHITE, "Simple Bullet", ES_UP));
         }
         
-        if(player->currentBullet != NULL)
-        {
-            Bullet_update(player->currentBullet);
-        }
+        //if(player->currentBulletSet != NULL)
+        //{
+            BulletArray_update(player->currentBulletSet);
+        //}
    
         player->velocity.x = 0;
         player->velocity.y = 0;
