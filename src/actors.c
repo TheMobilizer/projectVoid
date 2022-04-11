@@ -201,8 +201,9 @@ void Enemy_draw(struct Enemy *enemy)
     DrawRectangleRec(enemy->colRec, enemy->color);
 }
 
-void Enemy_update(struct Enemy *enemy, struct Player* player)
+void Enemy_update(struct Enemy *enemy)
 {
+    
     if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
     {
         enemy->right = FALSE;
@@ -287,6 +288,18 @@ void Enemy_free(struct Enemy *enemy)
     free(enemy);
 }
 
+int Enemy_collide(struct Enemy *enemy, struct Player *player)
+{
+    for(int i = 0; i <player->currentBulletSet->length; i++)
+    {
+        if (CheckCollisionRecs(enemy->colRec, (player->currentBulletSet->bullets[i].colRec)))
+        {
+            BulletArray_destroyBullet(player->currentBulletSet, i);
+            return 1;
+        }
+    }
+    return 0;
+}
 //------------------------------------------------------------------
 
 //--------------Player Bullet struct and functions------------------

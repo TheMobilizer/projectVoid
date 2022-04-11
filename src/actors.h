@@ -25,9 +25,10 @@ void Enemy_setPosCentre(struct Enemy *enemy, float x, float y);
 struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, int right, int left, int up, int down);
 
 void Enemy_draw(struct Enemy *enemy);
-void Enemy_update(struct Enemy *enemy, struct Player* player);
+void Enemy_update(struct Enemy *enemy);
 void Enemy_destroy(struct Enemy *enemy);
 void Enemy_free(struct Enemy *enemy);
+int Enemy_collide(struct Enemy *enemy, struct Player *player);
 
 
 //----------------------------------Player Bullet functions----------------------------
