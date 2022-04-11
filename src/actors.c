@@ -76,7 +76,15 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         player->fire = IsKeyDown(KEY_Z);
         
         
-
+        if(player->position.x + player->colRec.width >= SCR_WIDTH)
+            Player_setPosition(player,SCR_WIDTH - player->colRec.width - 1, player->position.y);
+        else if(player->position.x <= 0)
+            Player_setPosition(player, 1, player->position.y);
+        if(player->position.y <= 0)
+            Player_setPosition(player, player->position.x,1);
+        else if(player->position.y + player->colRec.height >= SCR_HEIGHT)
+            Player_setPosition(player, player->position.x, SCR_HEIGHT - player->colRec.height - 1);
+            
         if(player->up)
         {
             player->velocity.y = -Y_VEL;

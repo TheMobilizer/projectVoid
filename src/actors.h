@@ -1,7 +1,6 @@
 #ifndef ACTORS_H
 #define ACTORS_H
 
-#include "actors.h"
 #include "collections.h"
 
 //-------------------------Player functions-------------------------

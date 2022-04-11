@@ -1,11 +1,7 @@
-#ifndef INCLUDED
-
 #include "raylib.h"
 #include "actors.h"
 #include "defaults.h"
-
-#define INCLUDED
-#endif
+#include "collections.h"
 
 #include <stdlib.h>
 #include <stdio.h>
