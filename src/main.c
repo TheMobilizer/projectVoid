@@ -3,6 +3,7 @@
 #include "defaults.h"
 #include "collections.h"
 #include "types.h"
+#include "game.h"
 
 #include <stdio.h>
 
@@ -48,6 +49,9 @@ int main(void)
             
             
             EnemyArray_draw(enemyGroup);
+            
+            checkGameState(mainPlayer, enemyGroup);
+
 
         EndDrawing();
         //----------------------------------------------------------------------------------

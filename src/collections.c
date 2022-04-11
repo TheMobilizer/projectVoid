@@ -81,7 +81,10 @@ void EnemyArray_update(struct EnemyArray* enemyArray, struct Player* player)
     {
         Enemy_update((enemyArray->enemies + i));
         if (Enemy_collide((enemyArray->enemies + i), player))
+        {
             EnemyArray_destroyEnemy(enemyArray, i);
+            printf("In EnemyArray_update(). Enemy destroyed. EnemyArray->length = %d\n", enemyArray->length);
+        }
     }
 }
 
@@ -132,7 +135,11 @@ void BulletArray_update(struct BulletArray* bulletArray)
 {
     int i;
     for (i = 0; i < bulletArray->length; i++)
+    {
+        if (bulletArray->bullets[i].position.y < -bulletArray->bullets[i].colRec.height)
+            BulletArray_destroyBullet(bulletArray, i);
         Bullet_update((bulletArray->bullets + i));
+    }
 }
 
 void BulletArray_destroyBullet(struct BulletArray* bulletArray, int index)

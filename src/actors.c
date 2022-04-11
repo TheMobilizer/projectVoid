@@ -1,11 +1,6 @@
-#ifndef INCLUDED
-
 #include "raylib.h"
 #include "actors.h"
 #include "defaults.h"
-
-#define INCLUDED
-#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -119,7 +114,6 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
     }
     else
     {
-        DrawText("---Game Over---", SCR_WIDTH/2 - 50, SCR_HEIGHT/2 - 50, 25, YELLOW);
         player->color = RAYWHITE;
     }
 }
