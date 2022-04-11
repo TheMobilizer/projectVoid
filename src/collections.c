@@ -74,11 +74,11 @@ void EnemyArray_draw(struct EnemyArray* enemyArray)
         Enemy_draw((enemyArray->enemies + i));
 }
 
-void EnemyArray_update(struct EnemyArray* enemyArray)
+void EnemyArray_update(struct EnemyArray* enemyArray, struct Player* player)
 {
     int i;
     for (i = 0; i < enemyArray->length; i++)
-        Enemy_update((enemyArray->enemies + i));
+        Enemy_update((enemyArray->enemies + i), player);
 }
 
 void EnemyArray_destroyEnemy(struct EnemyArray* enemyArray, int index)

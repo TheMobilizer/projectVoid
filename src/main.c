@@ -1,10 +1,9 @@
-#ifndef INCLUDED
 #include "raylib.h"
 #include "actors.h"
 #include "defaults.h"
-//#include "collections.h"
-#define INCLUDED
-#endif
+#include "collections.h"
+#include "types.h"
+
 #include <stdio.h>
 
 int main(void)
@@ -45,7 +44,7 @@ int main(void)
             Player_update(mainPlayer, enemyGroup);
             Player_draw(mainPlayer);
             
-            EnemyArray_update(enemyGroup);
+            EnemyArray_update(enemyGroup, mainPlayer);
             
             
             EnemyArray_draw(enemyGroup);

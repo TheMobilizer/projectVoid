@@ -201,7 +201,7 @@ void Enemy_draw(struct Enemy *enemy)
     DrawRectangleRec(enemy->colRec, enemy->color);
 }
 
-void Enemy_update(struct Enemy *enemy)
+void Enemy_update(struct Enemy *enemy, struct Player* player)
 {
     if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
     {
