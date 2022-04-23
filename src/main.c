@@ -9,6 +9,7 @@
 
 int main(void)
 {
+    float dt = 0.0f;    
     
     struct Player *mainPlayer = createPlayer((float) SCR_WIDTH/2,(float) 550,20,20, MAGENTA);
     
@@ -24,7 +25,10 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        
+        dt = GetFrameTime();
+        printf("Last Frame Time: %lfs\n", dt);
+        Player_update(mainPlayer, enemyGroup, dt);
+        EnemyArray_update(enemyGroup, mainPlayer, dt);
         //printf("x: %lf\n",(anEnemy->position).x);
         //printf("y: %lf\n",(anEnemy->position).y);
         //printf("enemy type: %s\n", anEnemy->type);
@@ -40,20 +44,13 @@ int main(void)
             DrawFPS(10,10);
             DrawText("Player Color", 10, 30, 14, mainPlayer->color);
             
-
             //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-            Player_update(mainPlayer, enemyGroup);
             Player_draw(mainPlayer);
-            
-            EnemyArray_update(enemyGroup, mainPlayer);
-            
-            
             EnemyArray_draw(enemyGroup);
             
-            checkGameState(mainPlayer, enemyGroup);
-
-
         EndDrawing();
+        
+        checkGameState(mainPlayer, enemyGroup);
         //----------------------------------------------------------------------------------
     }
 

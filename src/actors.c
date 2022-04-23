@@ -54,7 +54,7 @@ void Player_draw(struct Player *player)
         BulletArray_draw(player->currentBulletSet);
 }
 
-void Player_update(struct Player *player, struct EnemyArray *enemyArray)
+void Player_update(struct Player *player, struct EnemyArray *enemyArray, float dt)
 {
     if(player->isAlive)
     {
@@ -87,21 +87,21 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
             
         if(player->up)
         {
-            player->velocity.y = -Y_VEL;
+            player->velocity.y = -dt*Y_VEL;
         }
     
         else if(player->down)
         {
-            player->velocity.y = Y_VEL;
+            player->velocity.y = dt*Y_VEL;
         }
     
         if (player->right)
         {
-            player->velocity.x = X_VEL;
+            player->velocity.x = dt*X_VEL;
         }
         else if(player->left)
         {
-            player->velocity.x = -X_VEL;
+            player->velocity.x = -dt*X_VEL;
         }
     
         Player_setPosition(player ,player->position.x + player->velocity.x, player->position.y + player->velocity.y);
@@ -114,7 +114,7 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray)
         
         //if(player->currentBulletSet != NULL)
         //{
-            BulletArray_update(player->currentBulletSet);
+            BulletArray_update(player->currentBulletSet, dt);
         //}
    
         player->velocity.x = 0;
@@ -203,7 +203,7 @@ void Enemy_draw(struct Enemy *enemy)
     DrawRectangleRec(enemy->colRec, enemy->color);
 }
 
-void Enemy_update(struct Enemy *enemy)
+void Enemy_update(struct Enemy *enemy, float dt)
 {
     
     if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
@@ -246,7 +246,7 @@ void Enemy_update(struct Enemy *enemy)
             enemy->left = TRUE;
         }
         
-        Enemy_setPosition(enemy, enemy->position.x+2, enemy->position.y);
+        Enemy_setPosition(enemy, enemy->position.x+(dt*ES_X_VEL), enemy->position.y);
     }
     else if(enemy->left)
     {
@@ -256,7 +256,7 @@ void Enemy_update(struct Enemy *enemy)
             enemy->left = FALSE;
         }
         
-        Enemy_setPosition(enemy, enemy->position.x-2, enemy->position.y);
+        Enemy_setPosition(enemy, enemy->position.x-(dt*ES_X_VEL), enemy->position.y);
     }
     
     if(enemy->down)
@@ -331,14 +331,14 @@ void Bullet_setPosition(struct Bullet *bullet, float x, float y)
     bullet->colRec.y = y;
 }
 
-void Bullet_update(struct Bullet *bullet)
+void Bullet_update(struct Bullet *bullet, float dt)
 {
     if(bullet->position.y < -10)
     {
         bullet = NULL;
         return;
     }
-    Bullet_setPosition(bullet, bullet->position.x, bullet->position.y-SIMPLE_BULLETS_VELY);
+    Bullet_setPosition(bullet, bullet->position.x, bullet->position.y-(dt * SIMPLE_BULLETS_VELY));
     
 }
 void Bullet_draw(struct Bullet *bullet)

@@ -70,12 +70,12 @@ void EnemyArray_draw(struct EnemyArray* enemyArray)
         Enemy_draw((enemyArray->enemies + i));
 }
 
-void EnemyArray_update(struct EnemyArray* enemyArray, struct Player* player)
+void EnemyArray_update(struct EnemyArray* enemyArray, struct Player* player, float dt)
 {
     int i;
     for (i = 0; i < enemyArray->length; i++)
     {
-        Enemy_update((enemyArray->enemies + i));
+        Enemy_update((enemyArray->enemies + i), dt);
         if (Enemy_collide((enemyArray->enemies + i), player))
         {
             EnemyArray_destroyEnemy(enemyArray, i);
@@ -127,14 +127,14 @@ void BulletArray_draw(struct BulletArray* bulletArray)
         Bullet_draw((bulletArray->bullets + i));
 }
 
-void BulletArray_update(struct BulletArray* bulletArray)
+void BulletArray_update(struct BulletArray* bulletArray, float dt)
 {
     int i;
     for (i = 0; i < bulletArray->length; i++)
     {
         if (bulletArray->bullets[i].position.y < -bulletArray->bullets[i].colRec.height)
             BulletArray_destroyBullet(bulletArray, i);
-        Bullet_update((bulletArray->bullets + i));
+        Bullet_update((bulletArray->bullets + i), dt);
     }
 }
 
