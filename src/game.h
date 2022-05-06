@@ -5,6 +5,6 @@
 
 
 void checkGameState(struct Player* player, struct EnemyArray *enemies);
-
+struct Level *buildLevel();
 
 #endif

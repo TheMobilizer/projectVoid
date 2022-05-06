@@ -59,4 +59,10 @@ struct BulletArray
     int length;
 };
 
+struct Level
+{
+    struct EnemyArray *enemyWaves;
+    
+};
+
 #endif

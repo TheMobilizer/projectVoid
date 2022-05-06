@@ -13,9 +13,9 @@ int main(void)
     
     struct Player *mainPlayer = createPlayer((float) SCR_WIDTH/2,(float) 550,20,20, MAGENTA);
     
-    
-    struct EnemyArray *enemyGroup = createEnemyArray();
-    EnemyArray_populate(enemyGroup, "dat/em1.enmap", 10, 10, 20);
+    struct Level *level1 = buildLevel();
+    //struct EnemyArray *enemyGroup = createEnemyArray();
+    //EnemyArray_populate(enemyGroup, "dat/em1.enmap", 10, 10, 20);
     
     InitWindow(SCR_WIDTH, SCR_HEIGHT, "raylib [core] example - basic window");
     //ToggleFullscreen();
@@ -27,8 +27,8 @@ int main(void)
     {
         dt = GetFrameTime();
         printf("Last Frame Time: %lfs\n", dt);
-        Player_update(mainPlayer, enemyGroup, dt);
-        EnemyArray_update(enemyGroup, mainPlayer, dt);
+        Player_update(mainPlayer, level1->enemyWaves, dt);
+        EnemyArray_update(level1->enemyWaves, mainPlayer, dt);
         //printf("x: %lf\n",(anEnemy->position).x);
         //printf("y: %lf\n",(anEnemy->position).y);
         //printf("enemy type: %s\n", anEnemy->type);
@@ -46,18 +46,18 @@ int main(void)
             
             //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
             Player_draw(mainPlayer);
-            EnemyArray_draw(enemyGroup);
+            EnemyArray_draw(level1->enemyWaves);
             
         EndDrawing();
         
-        checkGameState(mainPlayer, enemyGroup);
+        checkGameState(mainPlayer, level1->enemyWaves);
         //----------------------------------------------------------------------------------
     }
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
     Player_free(mainPlayer);
-    EnemyArray_free(enemyGroup);
+    EnemyArray_free(level1->enemyWaves);
     CloseWindow();
     return 0;
 }
