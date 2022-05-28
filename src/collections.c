@@ -20,7 +20,7 @@ struct EnemyArray *addEnemy(struct EnemyArray* enemyArray, struct Enemy* enemy)
 {
     enemyArray->enemies[enemyArray->length] = *enemy;
     (enemyArray->length)++;
-    //printf("In addEnemy()\n");
+    printf("In addEnemy()\n");
     enemyArray->enemies = (struct Enemy*)realloc(enemyArray->enemies,(enemyArray->length + 1)*sizeof(struct Enemy));
     return enemyArray;
 }
@@ -46,7 +46,7 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, i
             if (c == 'E')
             {
                 printf("c == E\n");
-                enemyArray = addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member", ES_RIGHT));
+                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member", ES_RIGHT));
                 xp += ES_WIDTH + padding;
                
             }

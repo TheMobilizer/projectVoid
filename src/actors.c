@@ -54,7 +54,7 @@ void Player_draw(struct Player *player)
         BulletArray_draw(player->currentBulletSet);
 }
 
-void Player_update(struct Player *player, struct EnemyArray *enemyArray, float dt)
+void Player_update(struct Player *player, struct Level *level, float dt)
 {
     if(player->isAlive)
     {
@@ -67,7 +67,7 @@ void Player_update(struct Player *player, struct EnemyArray *enemyArray, float d
             return;
         }
         
-        Player_collide(player, enemyArray);
+        Player_collide(player, level);
         
         player->up = IsKeyDown(KEY_UP);
         player->down = IsKeyDown(KEY_DOWN);
@@ -137,16 +137,16 @@ void Player_free(struct Player *player)
     free(player);
 }
 
-void Player_collide(struct Player *player, struct EnemyArray * enemyArray)
+void Player_collide(struct Player *player, struct Level *level)
 {
     int i;
-    for(i = 0; i < enemyArray->length; i++)
+    for(i = 0; i < (level->enemyWaves + level->currentWave - 1)->length; i++)
     {
-        if(CheckCollisionRecs(player->colRec, enemyArray->enemies[i].colRec))
+        if(CheckCollisionRecs(player->colRec, (level->enemyWaves + level->currentWave - 1)->enemies[i].colRec))
         {
             Player_die(player);
-            EnemyArray_destroyEnemy(enemyArray, i);
-            printf("In Player_collide(). enemyArray->length = %d\n",enemyArray->length);
+            EnemyArray_destroyEnemy((level->enemyWaves + level->currentWave - 1), i);
+            printf("In Player_collide(). enemyArray->length = %d\n",(level->enemyWaves + level->currentWave - 1)->length);
             break;
         }
         else

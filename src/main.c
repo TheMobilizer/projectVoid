@@ -27,8 +27,8 @@ int main(void)
     {
         dt = GetFrameTime();
         printf("Last Frame Time: %lfs\n", dt);
-        Player_update(mainPlayer, level1->enemyWaves, dt);
-        EnemyArray_update(level1->enemyWaves, mainPlayer, dt);
+        Player_update(mainPlayer, level1, dt);
+        Level_update(level1, mainPlayer, dt);
         //printf("x: %lf\n",(anEnemy->position).x);
         //printf("y: %lf\n",(anEnemy->position).y);
         //printf("enemy type: %s\n", anEnemy->type);
@@ -46,11 +46,12 @@ int main(void)
             
             //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
             Player_draw(mainPlayer);
-            EnemyArray_draw(level1->enemyWaves);
+            //EnemyArray_draw(level1->enemyWaves);
+            Level_draw(level1);
             
         EndDrawing();
         
-        checkGameState(mainPlayer, level1->enemyWaves);
+        checkGameState(mainPlayer, level1);
         //----------------------------------------------------------------------------------
     }
 

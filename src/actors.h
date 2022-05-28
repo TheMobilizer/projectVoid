@@ -9,9 +9,9 @@ struct Player* createPlayer(float x, float y, float height, float width, Color c
 
 void Player_setPosition(struct Player *player, float x, float y);
 void Player_draw(struct Player *player);
-void Player_update(struct Player *player, struct EnemyArray *enemyArray, float dt);
+void Player_update(struct Player *player, struct Level *level, float dt);
 void Player_free(struct Player *player);
-void Player_collide(struct Player *player, struct EnemyArray *enemyArray);
+void Player_collide(struct Player *player, struct Level *level);
 
 //--------------------------Enemy functions-------------------------
 

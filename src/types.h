@@ -62,7 +62,9 @@ struct BulletArray
 struct Level
 {
     struct EnemyArray *enemyWaves;
-    
+    int numEnArr;
+    int currentWave;
+    int maxWaves;
 };
 
 #endif
