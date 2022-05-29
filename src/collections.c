@@ -43,10 +43,17 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, i
         printf("File opened successfully\n");
         while((c = fgetc(waveFile)) != EOF)
         {
-            if (c == 'E')
+            if (c == 'B')
             {
-                printf("c == E\n");
+                printf("c == B\n");
                 addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member", ES_RIGHT));
+                xp += ES_WIDTH + padding;
+               
+            }
+            else if (c == 'G')
+            {
+                printf("c == G\n");
+                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, GREEN,"Green-Swarm Member", ES_RIGHT));
                 xp += ES_WIDTH + padding;
                
             }
