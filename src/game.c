@@ -1,8 +1,8 @@
 #include "raylib.h"
-#include "defaults.h"
-#include "game.h"
-#include "types.h"
-#include "collections.h"
+#include "include/defaults.h"
+#include "include/game.h"
+#include "include/types.h"
+#include "include/collections.h"
 #include <stdlib.h>
 
 void checkGameState(struct Player* player, struct Level* level)

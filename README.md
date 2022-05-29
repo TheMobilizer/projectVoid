@@ -11,19 +11,37 @@ The name isn't final. In fact, it is only a placeholder.
 Here's what the project structure looks like:
 ```
 projectVoid/
- |_ src/
- |_ dat/
- |_ Makefile
+├── bin
+│   └── void
+├── dat
+│   ├── em1.enmap
+│   └── em2.enmap
+├── LICENSE
+├── Makefile
+├── README.md
+└── src
+    ├── actors.c
+    ├── collections.c
+    ├── game.c
+    ├── include
+    │   ├── actors.h
+    │   ├── collections.h
+    │   ├── defaults.h
+    │   ├── game.h
+    │   └── types.h
+    └── main.c
+
 ```
 The `dat` folder will, in future, contain all assets like images, textures, sound files, files related to enemies and files describing levels etc.  
-The `src` folder contains the C code all in one folder, including the header files.
+The `src` folder contains .c files and the `include` folder which contains the header files.
 #### How to build?
-After you've configured your environment, just do `make run` in the `projectVoid` folder. So `projectVoid$ make run` This will build and run the game.  
+After you've configured your environment, just do `make run` in the `projectVoid` folder.  
+So `projectVoid$ make run` This will build and run the game.  
 Please note that this was only tested on a Linux system (Pop!_OS 20.04), with gcc version 9.4.0 and raylib version 3.8.
 #### Current state
 The basic features like levels are still being developed.  
 Right now, upon running the game, you see a player you control. It can shoot bullets at the various enemies which kill them instantly. The player has a few lives which are lost upon contact with any enemy, also destroying the enemy. 
-The enemies don't fire back and upon finishing off one wave, another enemy wave spawns. Destroying all of them gives you a 'you win' screen while losing all lives throws a 'game over' screen.
+The enemies don't fire back and upon finishing off one wave, another enemy wave spawns. Destroying all of them gives you a 'you win' screen while losing all lives throws a 'game over' screen. There are also, inevitably, a few bugs which need to be fixed.
 #### Wishlist/Planned features
 - Multiple levels
 - Graphics for everything, e.g. player, enemies, bullets etc.

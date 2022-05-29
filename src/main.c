@@ -1,9 +1,9 @@
 #include "raylib.h"
-#include "actors.h"
-#include "defaults.h"
-#include "collections.h"
-#include "types.h"
-#include "game.h"
+#include "include/actors.h"
+#include "include/defaults.h"
+#include "include/collections.h"
+#include "include/types.h"
+#include "include/game.h"
 
 #include <stdio.h>
 

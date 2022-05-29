@@ -1,6 +1,6 @@
 #include "raylib.h"
-#include "actors.h"
-#include "defaults.h"
+#include "include/actors.h"
+#include "include/defaults.h"
 
 #include <stdio.h>
 #include <stdlib.h>

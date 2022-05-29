@@ -1,7 +1,7 @@
 #include "raylib.h"
-#include "actors.h"
-#include "defaults.h"
-#include "collections.h"
+#include "include/actors.h"
+#include "include/defaults.h"
+#include "include/collections.h"
 
 #include <stdlib.h>
 #include <stdio.h>
