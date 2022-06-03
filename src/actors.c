@@ -193,7 +193,8 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     enemy->left = left;
     
     enemy->isAlive = true;
-    
+    enemy->timeElapsed = 0.0f;
+    enemy->totalTime = 0.0f;
     return enemy;
     
 }
@@ -205,7 +206,15 @@ void Enemy_draw(struct Enemy *enemy)
 
 void Enemy_update(struct Enemy *enemy, float dt)
 {
-    
+    enemy->totalTime+=dt;
+    if(enemy->totalTime >= 5.0f)
+    {
+        enemy->totalTime = 0;
+        //if(enemy->color != BLACK)
+            //enemy->color = BLACK;
+        //else
+          //  enemy->color = BLUE;
+    }
     if((enemy->position.x + ES_WIDTH) > SCR_WIDTH)
     {
         enemy->right = FALSE;

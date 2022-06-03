@@ -29,6 +29,8 @@ struct Enemy
     int left;
     char* type;
     bool isAlive;
+    float timeElapsed;
+    float totalTime;
 };
 
 struct Player
@@ -65,6 +67,7 @@ struct Level
     int numEnArr;
     int currentWave;
     int maxWaves;
+    float timeElapsed;
 };
 
 #endif
