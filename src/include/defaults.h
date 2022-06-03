@@ -1,5 +1,5 @@
-#define SCR_WIDTH 800
-#define SCR_HEIGHT 600
+#define SCR_WIDTH 1024
+#define SCR_HEIGHT 768
 #define BOOL int
 #define TRUE 1
 #define FALSE 0
