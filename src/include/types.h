@@ -10,27 +10,11 @@ struct Bullet
     Rectangle colRec;
     Color color;
     char* type;
-    int up;
-    int down;
-    int right;
-    int left;
+    bool up;
+    bool down;
+    bool right;
+    bool left;
     bool isAlive;
-};
-
-struct Enemy
-{
-    Vector2 position;
-    Vector2 velocity;
-    Rectangle colRec;
-    Color color;
-    int up;
-    int down;
-    int right;
-    int left;
-    char* type;
-    bool isAlive;
-    float timeElapsed;
-    float totalTime;
 };
 
 struct Player
@@ -41,12 +25,29 @@ struct Player
     Color color;
     struct BulletArray *currentBulletSet;
     int lives;
-    int isAlive;
-    int fire;
-    int up;
-    int down;
-    int right;
-    int left;
+    bool isAlive;
+    bool fire;
+    bool up;
+    bool down;
+    bool right;
+    bool left;
+};
+
+struct Enemy
+{
+    Vector2 position;
+    Vector2 velocity;
+    Rectangle colRec;
+    Color color;
+    bool up;
+    bool down;
+    bool right;
+    bool left;
+    char* type;
+    bool isAlive;
+    float timeElapsed;
+    float totalTime;
+    void (*update)(struct Enemy *, struct Player *, float);
 };
 
 struct EnemyArray

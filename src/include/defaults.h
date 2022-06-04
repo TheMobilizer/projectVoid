@@ -12,6 +12,9 @@
 #define ES_X_VEL 120
 #define ES_Y_VEL 20
 
+#define ES_SEEK_X_VEL 240
+#define ES_SEEK_Y_VEL 240
+
 #define ES_RIGHT 1,0,0,0
 #define ES_LEFT 0,1,0,0
 #define ES_UP 0,0,1,0

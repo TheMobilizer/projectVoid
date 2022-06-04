@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <math.h>
 
 //--------------------------Player functions-------------------------------
 
@@ -177,7 +177,7 @@ void Enemy_setPosCentre(struct Enemy *enemy, float x, float y)
     Enemy_setPosition(enemy, x-((enemy->colRec.width)/2),y-((enemy->colRec.height)/2));
 }
 
-struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, int right, int left, int up, int down)
+struct Enemy* createEnemy(float x, float y, float height, float width, Color color, char* type, void (*updateFunction)(struct Enemy *, struct Player *, float),int right, int left, int up, int down)
 {
     struct Enemy *enemy = (struct Enemy *)malloc(sizeof(struct Enemy));
     
@@ -195,6 +195,7 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     enemy->isAlive = true;
     enemy->timeElapsed = 0.0f;
     enemy->totalTime = 0.0f;
+    enemy->update = updateFunction;
     return enemy;
     
 }
@@ -204,7 +205,7 @@ void Enemy_draw(struct Enemy *enemy)
     DrawRectangleRec(enemy->colRec, enemy->color);
 }
 
-void Enemy_update(struct Enemy *enemy, float dt)
+void Enemy_update(struct Enemy *enemy, struct Player *player, float dt)
 {
     enemy->totalTime+=dt;
     if(enemy->totalTime >= 5.0f)
@@ -286,6 +287,15 @@ void Enemy_update(struct Enemy *enemy, float dt)
             
         Enemy_setPosition(enemy, enemy->position.x, enemy->position.y-2);
     }
+}
+
+void Enemy_updateSeek(struct Enemy *enemy, struct Player *player, float dt)
+{
+    float difX = player->position.x - enemy->position.x;
+    float difY = player->position.y - enemy->position.y;
+    Vector2 direction = {(difX)/sqrt(pow(difX, 2) + pow(difY, 2)),(difY)/sqrt(pow(difX, 2) + pow(difY, 2))};
+    Enemy_setPosition(enemy, enemy->position.x+(direction.x*dt*ES_SEEK_X_VEL), enemy->position.y+(direction.y*dt*ES_SEEK_Y_VEL));
+    
 }
 
 void Enemy_destroy(struct Enemy *enemy)
