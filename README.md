@@ -10,12 +10,12 @@ The name isn't final. In fact, it is only a placeholder.
 #### Structure of the project
 Here's what the project structure looks like:
 ```
-projectVoid/
 ├── bin
 │   └── void
 ├── dat
 │   ├── em1.enmap
-│   └── em2.enmap
+│   ├── em2.enmap
+│   └── em3.enmap
 ├── LICENSE
 ├── Makefile
 ├── README.md
@@ -28,8 +28,10 @@ projectVoid/
     │   ├── collections.h
     │   ├── defaults.h
     │   ├── game.h
+    │   ├── misc.h
     │   └── types.h
-    └── main.c
+    ├── main.c
+    └── misc.c
 
 ```
 The `dat` folder will, in future, contain all assets like images, textures, sound files, files related to enemies and files describing levels etc.  
