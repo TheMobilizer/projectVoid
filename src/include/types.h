@@ -47,6 +47,7 @@ struct Enemy
     bool isAlive;
     float timeElapsed;
     float totalTime;
+    float trig_x;
     void (*update)(struct Enemy *, struct Player *, float);
 };
 

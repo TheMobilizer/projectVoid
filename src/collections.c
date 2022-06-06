@@ -45,22 +45,22 @@ void EnemyArray_populate(struct EnemyArray* enemyArray, char *filePath, int x, i
         {
             if (c == 'B')
             {
-                printf("c == B\n");
+                //printf("c == B\n");
                 addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, BLUE,"Blue-Swarm Member", Enemy_update,ES_RIGHT));
                 xp += ES_WIDTH + padding;
                
             }
             else if (c == 'G')
             {
-                printf("c == G\n");
-                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, GREEN,"Green-Swarm Member", Enemy_update, ES_RIGHT));
+                //printf("c == G\n");
+                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, GREEN,"Green-Swarm Member", Enemy_updateSin, ES_RIGHT));
                 xp += ES_WIDTH + padding;
                
             }
             else if (c == 'R')
             {
-                printf("c == R\n");
-                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, RED,"Red-Swarm Member", Enemy_updateSeek, ES_DOWN));
+                //printf("c == R\n");
+                addEnemy(enemyArray, createEnemy((float) (xp), (float) yp, ES_HEIGHT, ES_WIDTH, RED,"Red-Swarm Member", Enemy_updateSeek, ES_RIGHT));
                 xp += ES_WIDTH + padding;
                
             }
