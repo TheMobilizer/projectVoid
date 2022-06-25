@@ -10,7 +10,7 @@
 #define ES_HEIGHT 20
 
 #define ES_X_VEL 120
-#define ES_Y_VEL 20
+#define ES_Y_VEL 90
 
 #define ES_SEEK_X_VEL 240
 #define ES_SEEK_Y_VEL 240

@@ -196,7 +196,7 @@ struct Enemy* createEnemy(float x, float y, float height, float width, Color col
     enemy->isAlive = true;
     enemy->timeElapsed = 0.0f;
     enemy->totalTime = 0.0f;
-    enemy->trig_x = 50.0f;
+    enemy->trig_x = 75.0f;
     enemy->update = updateFunction;
     return enemy;
     
@@ -315,8 +315,8 @@ void Enemy_updateSin(struct Enemy *enemy, struct Player *player, float dt)
     {
         if(enemy->position.x < 0)
             Enemy_setPosition(enemy, 0, enemy->position.y);
-        printf("Right: delta enemy->position.x = %lf\n", ES_X_VEL*dt);
-        Enemy_setPosition(enemy, (enemy->position.x + (ES_X_VEL*dt)), (enemy->position.y + (sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
+        printf("Right: delta enemy->position.y = %lf\n", (sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI))));
+        Enemy_setPosition(enemy, (enemy->position.x + (ES_X_VEL*dt)), (enemy->position.y + dt*ES_Y_VEL*(sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
         if(enemy->position.x + ES_WIDTH >= SCR_WIDTH)
         {
             enemy->right = FALSE;
@@ -325,8 +325,43 @@ void Enemy_updateSin(struct Enemy *enemy, struct Player *player, float dt)
     }
     if(enemy->left)
     {
-        printf("Left: delta enemy->position.x = %lf\n", ES_X_VEL*dt);
-        Enemy_setPosition(enemy, (enemy->position.x - (ES_X_VEL*dt)), (enemy->position.y+(sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
+        printf("Left: delta enemy->position.y = %lf\n", (sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI))));
+        Enemy_setPosition(enemy, (enemy->position.x - (ES_X_VEL*dt)), (enemy->position.y + dt*ES_Y_VEL*(sin(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
+        if(enemy->position.x <= 0)
+        {
+            enemy->right = TRUE;
+            enemy->left = FALSE;
+        }
+    }
+    if(enemy->position.y > SCR_HEIGHT)
+        Enemy_setPosition(enemy, enemy->position.x, -20);
+    
+    
+}
+
+void Enemy_updateCos(struct Enemy *enemy, struct Player *player, float dt)
+{
+    
+    enemy->timeElapsed += dt;
+    enemy->trig_x += ES_X_VEL*dt;
+    if (enemy->trig_x >= SCR_WIDTH/5)
+        enemy->trig_x = 0.0f;
+    if(enemy->right)
+    {
+        if(enemy->position.x < 0)
+            Enemy_setPosition(enemy, 0, enemy->position.y);
+        //printf("Right: delta enemy->position.x = %lf\n", ES_X_VEL*dt);
+        Enemy_setPosition(enemy, (enemy->position.x + (ES_X_VEL*dt)), (enemy->position.y + dt*ES_Y_VEL*(cos(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
+        if(enemy->position.x + ES_WIDTH >= SCR_WIDTH)
+        {
+            enemy->right = FALSE;
+            enemy->left = TRUE;
+        }
+    }
+    if(enemy->left)
+    {
+        //printf("Left: delta enemy->position.x = %lf\n", ES_X_VEL*dt);
+        Enemy_setPosition(enemy, (enemy->position.x - (ES_X_VEL*dt)), (enemy->position.y+ dt*ES_Y_VEL*(cos(map(enemy->trig_x, 0, SCR_WIDTH/5, 0, 2*M_PI)))));
         if(enemy->position.x <= 0)
         {
             enemy->right = TRUE;

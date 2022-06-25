@@ -27,6 +27,7 @@ void Enemy_draw(struct Enemy *enemy);
 void Enemy_update(struct Enemy *enemy, struct Player *player, float dt);
 void Enemy_updateSeek(struct Enemy *enemy, struct Player *player, float dt);
 void Enemy_updateSin(struct Enemy *enemy, struct Player *player, float dt);
+void Enemy_updateCos(struct Enemy *enemy, struct Player *player, float dt);
 void Enemy_destroy(struct Enemy *enemy);
 void Enemy_free(struct Enemy *enemy);
 int Enemy_collide(struct Enemy *enemy, struct Player *player);

@@ -34,7 +34,6 @@ int main(void)
             ClearBackground(BLACK);
             DrawFPS(10,10);
             DrawText("Player Color", 10, 30, 14, mainPlayer->color);
-            
             Player_draw(mainPlayer);
             
             Level_draw(level1);
